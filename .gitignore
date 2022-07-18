@@ -1,6 +1,7 @@
 db
 
 /src/vendor/
+.idea/
 /src/node_modules/
 /src/npm-debug.log
 /src/yarn-error.log

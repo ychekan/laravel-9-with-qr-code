@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: web
+    volumes:
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+      - ./src:/var/www/html
+    ports:
+      - 8080:80
+    links:
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3306
+
+  redis:
+    image: redis:4.0
+    container_name: app_redis
+    ports:
+      - "6382:6379"
